@@ -49,7 +49,8 @@ public class SecurityConfig {
                         .requestMatchers("/auth/*")
                         .permitAll()
                         .anyRequest()
-                        .authenticated())
+                        .hasAnyRole("ADMIN", "TEACHER", "DEPARTMENT_WORKER")
+                )
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exceptionHandling -> exceptionHandling
