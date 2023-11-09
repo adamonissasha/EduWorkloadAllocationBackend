@@ -1,6 +1,10 @@
 server:
   port: 8080
 
+jwt:
+  secret: sashaadamonis_ytdsjvhd2873we8847wh
+  lifetime: 30m
+
 spring:
   application:
     name: common-service
@@ -9,11 +13,10 @@ spring:
     url: jdbc:postgresql://localhost:5432/study_load_common
     username:
     password:
-
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
