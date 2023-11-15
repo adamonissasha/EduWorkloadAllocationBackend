@@ -15,12 +15,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+    private final JwtRequestFilter jwtRequestFilter;
+    private static final String ADMIN = "ADMIN";
+    private static final String TEACHER = "TEACHER";
+    private static final String DEPARTMENT_WORKER = "DEPARTMENT_WORKER";
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -46,11 +51,14 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/auth/*")
+                        .requestMatchers("/common/auth/**")
                         .permitAll()
+                        .requestMatchers("/common/employee/**")
+                        .hasAnyRole(DEPARTMENT_WORKER, ADMIN)
                         .anyRequest()
-                        .hasAnyRole("ADMIN", "TEACHER", "DEPARTMENT_WORKER")
+                        .hasAnyRole(ADMIN, TEACHER, DEPARTMENT_WORKER)
                 )
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exceptionHandling -> exceptionHandling
