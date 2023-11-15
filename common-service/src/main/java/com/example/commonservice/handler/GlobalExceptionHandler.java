@@ -1,5 +1,6 @@
 package com.example.commonservice.handler;
 
+import com.example.commonservice.exception.EmployeeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,5 +15,11 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public String badCredentialException() {
         return BAD_CREDENTIAL_MESSAGE;
+    }
+
+    @ExceptionHandler(value = EmployeeNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
+        return ex.getMessage();
     }
 }

@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum AcademicDegree {
-    DOCTOR_OF_SCIENCES("Доктора наук"),
+    DOCTOR_OF_SCIENCES("Доктор наук"),
     CANDIDATE_OF_SCIENCES("Кандидат наук");
 
     private final String name;
