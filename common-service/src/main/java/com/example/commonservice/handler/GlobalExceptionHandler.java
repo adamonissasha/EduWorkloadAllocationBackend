@@ -1,6 +1,8 @@
 package com.example.commonservice.handler;
 
+import com.example.commonservice.exception.DepartmentNotFoundException;
 import com.example.commonservice.exception.EmployeeNotFoundException;
+import com.example.commonservice.exception.FacultyNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +22,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = EmployeeNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(value = FacultyNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleFacultyNotFoundException(FacultyNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(value = DepartmentNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleDepartmentNotFoundException(DepartmentNotFoundException ex) {
         return ex.getMessage();
     }
 }

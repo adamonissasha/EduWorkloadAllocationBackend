@@ -53,7 +53,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/common/auth/**")
                         .permitAll()
-                        .requestMatchers("/common/employee/**")
+                        .requestMatchers("/common/employee/**",
+                                "/common/department/**",
+                                "/common/faculty/**")
                         .hasAnyRole(DEPARTMENT_WORKER, ADMIN)
                         .anyRequest()
                         .hasAnyRole(ADMIN, TEACHER, DEPARTMENT_WORKER)
