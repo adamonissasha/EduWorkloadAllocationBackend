@@ -12,10 +12,10 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
-        - id: auth
+        - id: common
           uri: ${COMMON_SERVICE_URI:http://localhost:8080}
           predicates:
-            - Path=/auth/**
+            - Path=/common/**
       globalcors:
         corsConfigurations:
           '[/**]':
