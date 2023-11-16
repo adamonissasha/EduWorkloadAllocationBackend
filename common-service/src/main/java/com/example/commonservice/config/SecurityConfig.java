@@ -55,7 +55,9 @@ public class SecurityConfig {
                         .permitAll()
                         .requestMatchers("/common/employee/**",
                                 "/common/department/**",
-                                "/common/faculty/**")
+                                "/common/faculty/**",
+                                "/common/course/**",
+                                "/common/speciality/**")
                         .hasAnyRole(DEPARTMENT_WORKER, ADMIN)
                         .anyRequest()
                         .hasAnyRole(ADMIN, TEACHER, DEPARTMENT_WORKER)
