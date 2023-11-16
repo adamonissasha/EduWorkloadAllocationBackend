@@ -47,6 +47,12 @@ public class GlobalExceptionHandler {
         return ex.getMessage();
     }
 
+    @ExceptionHandler(value = SpecialityCourseNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleSpecialityCourseNotFoundException(SpecialityCourseNotFoundException ex) {
+        return ex.getMessage();
+    }
+
     @ExceptionHandler(value = DepartmentNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleDepartmentNotFoundException(DepartmentNotFoundException ex) {
