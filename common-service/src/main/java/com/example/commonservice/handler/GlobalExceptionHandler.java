@@ -3,6 +3,7 @@ package com.example.commonservice.handler;
 import com.example.commonservice.exception.DepartmentNotFoundException;
 import com.example.commonservice.exception.EmployeeNotFoundException;
 import com.example.commonservice.exception.FacultyNotFoundException;
+import com.example.commonservice.exception.SpecialityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +29,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = FacultyNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleFacultyNotFoundException(FacultyNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ExceptionHandler(value = SpecialityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public String handleSpecialityNotFoundException(SpecialityNotFoundException ex) {
         return ex.getMessage();
     }
 
